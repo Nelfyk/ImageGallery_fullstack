@@ -57,6 +57,8 @@ public class MainService {
             // если добавление через URL(есть URL)
             if (multipartFile == null) {
                 try (InputStream inputStream = new URL(request.getUrl()).openStream()) {
+                    String filenameExtension = request.getUrl().substring(request.getUrl().lastIndexOf("."));
+                    request.setFilename(request.getFilename()+filenameExtension);
                     response = uploadToStorage(request, inputStream);
                 }
             } else {
