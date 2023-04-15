@@ -55,7 +55,7 @@ public class MainService {
         Response response;
         try {
             // если добавление через URL(есть URL)
-            if (multipartFile.isEmpty()) {
+            if (multipartFile == null) {
                 try (InputStream inputStream = new URL(request.getUrl()).openStream()) {
                     response = uploadToStorage(request, inputStream);
                 }
