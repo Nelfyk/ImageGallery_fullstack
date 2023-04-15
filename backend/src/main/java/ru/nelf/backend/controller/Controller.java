@@ -42,7 +42,7 @@ public class Controller {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Response fileUpload(@RequestParam("filename") String filename,
                                @RequestParam("category") String category,
-                               @RequestParam(value = "url", required = false) String url,
+                               @RequestParam(value = "link", required = false) String url,
                                @RequestParam(value = "file", required = false) MultipartFile multipartFile) {
         log.info("fileUpload(" + filename + "," + category + "," + url + "," + multipartFile + ")");
         return mainService.putImage(new Request(filename, category, url), multipartFile);
