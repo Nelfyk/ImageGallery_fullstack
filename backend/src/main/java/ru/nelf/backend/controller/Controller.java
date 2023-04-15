@@ -11,6 +11,8 @@ import ru.nelf.backend.entity.Response;
 import ru.nelf.backend.entity.ResponseCategoryFiles;
 import ru.nelf.backend.service.MainService;
 
+import java.io.File;
+
 @RestController
 @CrossOrigin
 @Slf4j
@@ -22,6 +24,8 @@ public class Controller {
     @GetMapping(value = "/")
     public ResponseCategoryFiles getCategoryFiles(@RequestParam String category) {
         log.info("getCategoryFiles(" + category + ")");
+        System.out.println(new File("").getAbsolutePath());
+        log.info(new File("").getAbsolutePath());
         return category.equalsIgnoreCase(Category.ALL)
                 ? mainService.getAll() : mainService.getByCategory(category.toLowerCase());
     }
