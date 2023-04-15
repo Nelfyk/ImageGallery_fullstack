@@ -2,6 +2,7 @@ package ru.nelf.backend.service;
 
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import jakarta.annotation.PostConstruct;
 import lombok.SneakyThrows;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +31,15 @@ public class MainService {
     private MongoDBRepository mongoDBRepository;
 
     private final String PATH_TO_TEMP = "./src/main/resources/temp/";
+
+    @PostConstruct
+    private void init(){
+        try {
+            Files.createDirectories(Paths.get(PATH_TO_TEMP));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public ResponseCategoryFiles getAll() {
         List<File> fileList = mongoDBRepository.findAll();
