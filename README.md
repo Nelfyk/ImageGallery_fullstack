@@ -8,4 +8,5 @@ Frontend - Сайт на котором отображаются картинк�
 - Spring Data
 - Maven
 - БД MongoDB
+- Yandex Object Storage
 - Docker
